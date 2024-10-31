@@ -2,8 +2,8 @@ name: 'Terraform plan'
 
 on:
   push:
-    branches:
-      -dev
+    branches: [ "dev" ]
+
     
 
 jobs:
