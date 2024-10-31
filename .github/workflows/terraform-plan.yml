@@ -2,7 +2,7 @@ name: 'Terraform plan'
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "dev" ]
   pull_request:
 
 permissions:
