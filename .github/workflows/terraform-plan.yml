@@ -3,7 +3,8 @@ name: 'Terraform plan'
 on:
   push:
     branches: [ "dev" ]
-  pull_request:
+
+    
 
 jobs:
   terraform:
