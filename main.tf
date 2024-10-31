@@ -1,5 +1,6 @@
 provider "azurerm" {
   features {}
+  subscription_id = "7809a880-b293-43cb-91e4-8f08b04e1c09"
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -8,11 +9,11 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_api_management" "apim" {
-  name                = "myAPIMInstance"
+  name                = "SarfraazAPIMInstance"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   publisher_name      = "Sarfraaz"
-  publisher_email     = "sarfraaz@outlook.com"
+  publisher_email     = "sarfraaz-nov-24@outlook.com"
   sku_name            = "Developer_1"
 }
 
