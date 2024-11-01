@@ -5,18 +5,13 @@ provider "azurerm" {
 
 terraform {
   backend "azurerm" {
-    resource_group_name  = "myTerraformStateGroup"
+    resource_group_name  = "SarfraazAPIMRG2"
     storage_account_name = "mytfstatestorage"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
   }
 }
 
-
-resource "azurerm_resource_group" "rg" {
-  name     = "myTerraformStateGroup"
-  location = "West Europe"
-}
 
 resource "azurerm_storage_account" "storage" {
   name                     = "mytfstatestorage"
