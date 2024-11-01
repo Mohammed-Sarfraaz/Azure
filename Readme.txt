@@ -1,1 +1,1 @@
-This will deploy APIM to Azure
+This will deploy APIM to Azure.
