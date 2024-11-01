@@ -3,31 +3,6 @@ provider "azurerm" {
   subscription_id = "7809a880-b293-43cb-91e4-8f08b04e1c09"
 }
 
-terraform {
-  backend "azurerm" {
-    resource_group_name  = "SarfraazAPIMRG2"
-    storage_account_name = "mytfstatestorage"
-    container_name       = "tfstate"
-    key                  = "terraform.tfstate"
-  }
-}
-
-
-resource "azurerm_storage_account" "storage" {
-  name                     = "mytfstatestorage"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  account_tier            = "Standard"
-  account_replication_type = "LRS"
-}
-
-resource "azurerm_storage_container" "container" {
-  name                  = "tfstate"
-  storage_account_name  = azurerm_storage_account.storage.name
-  container_access_type = "private"
-}
-
-
 resource "azurerm_resource_group" "rg" {
   name     = "SarfraazAPIMRG2"
   location = "West Europe"
