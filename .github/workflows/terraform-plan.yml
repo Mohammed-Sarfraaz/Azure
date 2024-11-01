@@ -22,7 +22,6 @@ jobs:
         shell: bash
 
     steps:
-    steps:
     - name: Azure Login
       uses: azure/login@v2
       with: 
