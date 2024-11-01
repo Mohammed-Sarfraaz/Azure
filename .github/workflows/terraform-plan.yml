@@ -22,11 +22,12 @@ jobs:
         shell: bash
 
     steps:
-    # Login to Az
-    #- name: Azure Login
-    #  uses: azure/login@v1
-    #  with: 
-     #   creds: ${{ secrets.AZ_CREDS }}
+    steps:
+    - name: Azure Login
+      uses: azure/login@v2
+      with: 
+       creds: ${{ secrets.AZ_CREDS }}
+       enable-AzPSSession: true
 
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
