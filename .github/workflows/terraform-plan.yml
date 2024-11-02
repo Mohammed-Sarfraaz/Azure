@@ -45,10 +45,10 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform init \ 
-                -backend-config "client-id=$TF_VAR_client_id" \ 
-                -backend-config "subscription_id=$TF_VAR_subscription_id" \ 
-                -backend-config "tenant_id=$TF_VAR_tenant_id"
+      run: terraform init
+      with:
+          args: '-backend-config="client-id=${{ secrets.ARM_CLIENT_ID }}" -backend-config="subscription_id=${{ secrets.ARM_SUBSCRIPTION_ID }}" -backend-config="tenant_id=${{ secrets.ARM_TENANT_ID }}"'
+      
       
 
     # Checks that all Terraform configuration files adhere to a canonical format
