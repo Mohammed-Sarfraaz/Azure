@@ -14,10 +14,6 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
-    env:
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
@@ -42,7 +38,16 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform init
+      run: > 
+        terraform init -backend=true -input=false
+        -backend-config=storage_account_name="stgtfstate"
+        -backend-config=resource_group_name="rg-tfstate"
+        -backend-config=container_name="contfstate"
+        -backend-config=key="apim.tfstate"
+        -backend-config=use_oidc=true
+        -backend-config=tenant_id=${{ secrets.ARM_TENANT_ID }}
+        -backend-config=client_id=${{ secrets.ARM_CLIENT_ID }}
+        -backend-config=subscription_id=${{ secrets.ARM_SUBSCRIPTION_ID }}      
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
