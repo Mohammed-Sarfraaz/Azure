@@ -1,7 +1,11 @@
 name: Import APIM to Terraform State
 
-on:
-  workflow_dispatch:
+on: workflow_dispatch
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   import-apim:
