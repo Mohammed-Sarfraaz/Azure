@@ -12,6 +12,7 @@ env:
   TF_STATE_FILE_NAME: "apim.tfstate"
   APIM_RESOURCE_GROUP: "mss-rg-apim"
   APIM_NAME: "mssapim2"
+  APIM_RESOURCE_GROUP_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/mss-rg-apim"
   APIM_RESOURCE_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/mss-rg-apim/providers/Microsoft.ApiManagement/service/mssapim2"
 
 
@@ -57,6 +58,10 @@ jobs:
           -backend-config=tenant_id=${{ secrets.ARM_TENANT_ID }}
           -backend-config=client_id=${{ secrets.ARM_CLIENT_ID }}
           -backend-config=subscription_id=${{ secrets.ARM_SUBSCRIPTION_ID }} 
+    
+     - name: Import APIM to Terraform State
+        run: |
+          terraform import azurerm_api_management.apim ${APIM_RESOURCE_GROUP_ID}    
 
       - name: Import APIM to Terraform State
         run: |
