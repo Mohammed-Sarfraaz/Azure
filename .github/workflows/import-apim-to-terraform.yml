@@ -1,0 +1,50 @@
+name: Import APIM to Terraform State
+
+on:
+  workflow_dispatch:
+
+jobs:
+  import-apim:
+    runs-on: ubuntu-latest
+
+    env:
+      TF_STATE_STORAGE_ACCOUNT_NAME: "stgtfstate"
+      TF_STATE_CONTAINER_NAME: "contfstate"
+      TF_STATE_FILE_NAME: "apim.tfstate"
+      APIM_RESOURCE_GROUP: "mss-rg-apim"
+      APIM_NAME: "mssapim2"
+      APIM_RESOURCE_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/${{ env.APIM_RESOURCE_GROUP }}/providers/Microsoft.ApiManagement/service/${{ env.APIM_NAME }}"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Connect to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
+
+      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+      - name: Terraform Init
+        run: > 
+          terraform init -backend=true -input=false
+          -backend-config=storage_account_name="stgtfstate"
+          -backend-config=resource_group_name="rg-tfstate"
+          -backend-config=container_name="contfstate"
+          -backend-config=key="apim.tfstate"
+          -backend-config=use_oidc=true
+          -backend-config=tenant_id=${{ secrets.ARM_TENANT_ID }}
+          -backend-config=client_id=${{ secrets.ARM_CLIENT_ID }}
+          -backend-config=subscription_id=${{ secrets.ARM_SUBSCRIPTION_ID }} 
+
+      - name: Import APIM to Terraform State
+        run: |
+          terraform import azurerm_api_management.apim_instance ${APIM_RESOURCE_ID}
