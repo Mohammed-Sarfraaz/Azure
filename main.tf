@@ -30,34 +30,7 @@ protocols           = ["https"]
   }
 
   import {
-    content_format = "swagger-json"
-    content_value  = <<JSON
-      {
-          "swagger": "2.0",
-          "info": {
-              "version": "1.0.0",
-              "title": "Health probe"
-          },
-          "host": "not-used-direct-response",
-          "basePath": "/",
-          "schemes": [
-              "https"
-          ],
-          "consumes": [
-              "application/json"
-          ],
-          "produces": [
-              "application/json"
-          ],
-          "paths": {
-              "/": {
-                  "get": {
-                      "operationId": "get-ping",
-                      "responses": {}
-                  }
-              }
-          }
-      }
-    JSON
+    content_format = "openapi"
+    content_value  = file("${path.module}/apis/ping-api.yaml")
   }
 }
