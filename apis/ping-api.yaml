@@ -1,17 +1,121 @@
+# this is an examplean API
+# as a demonstration of an API spec in YAML
 swagger: '2.0'
 info:
-  version: 1.0.0
-  title: Health probe
-host: not-used-direct-response
-basePath: "/"
+  title: Healthcheck example API
+  description: Add a descriptive healthcheck to your application
+  version: '1.0.0'
 schemes:
+- http
 - https
-consumes:
-- application/json
 produces:
 - application/json
 paths:
-  "/":
+  /healthcheck:
     get:
-      operationId: get-ping
-      responses: {}
+      summary: Health Check
+      description: The healthcheck endpoint provides detailed information about the
+        health of a web service. If each of the components required by the
+        service are healthy, then the service is considered healthy and will
+        return a 200 OK response. If any of the components needed by the service
+        are unhealthy, then a 503 Service Unavailable response will be provided.
+      responses:
+        200:
+          description: Health Check report
+          schema:
+            $ref: '#/definitions/Healthcheck'
+          examples:
+            application/json: |-
+              {
+                "generated_at": "2015-06-25T14:33:33.383Z",
+                "duration_millis": "15.8",
+                "tests": {
+                  "cassandra": {
+                    "duration_millis": 5.6,
+                    "result": "passed",
+                    "tested_at": "2015-06-25T14:33:15.229Z"
+                  },
+                  "redis": {
+                    "duration_millis": 15.6,
+                    "result": "passed",
+                    "tested_at": "2015-06-25T14:33:15.286Z",
+                    "error": "Unable to connect to myredis.mydomain.com:6379"
+                  }
+                }
+              }
+        503:
+          description: Unhealthy Service
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json: |-
+              {
+                "generated_at": "2015-06-25T14:33:33.383Z",
+                "duration_millis": "15.8",
+                "tests": {
+                  "cassandra": {
+                    "duration_millis": 5.6,
+                    "result": "passed",
+                    "tested_at": "2015-06-25T14:33:15.229Z"
+                  },
+                  "redis": {
+                    "duration_millis": 15.6,
+                    "result": "failed",
+                    "tested_at": "2015-06-25T14:33:15.286Z",
+                    "error": "Unable to connect to myredis.mydomain.com:6379"
+                  }
+                }
+              }
+definitions:
+  Error:
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
+  Healthcheck:
+    required:
+    - generated_at
+    - duration_millis
+    - tests
+    properties:
+      generated_at:
+        type: string
+        format: date-time
+        description: The ISO8601 date and time representing the start of the healthcheck
+          report
+      duration_millis:
+        type: number
+        description: The number of milliseconds that the healthecheck report took to
+          generate
+      tests:
+        type: object
+        additionalProperties:
+          type: object
+          additionalProperties:
+            $ref: '#/definitions/HealthcheckTest'
+  HealthcheckTest:
+    required:
+    - tested_at
+    - result
+    - duration_millis
+    properties:
+      tested_at:
+        type: string
+        format: date-time
+        description: The IS08601 date and time representing the start of the test
+      result:
+        type: string
+        description: The result of running the test
+        enum:
+        - passed
+        - failed
+      duration_millis:
+        type: number
+        description: The number of milliseconds that the test took to executed
+      error:
+        type: string
+        description: A string describing any error conditions that were experienced
