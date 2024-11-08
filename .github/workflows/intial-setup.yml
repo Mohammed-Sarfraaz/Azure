@@ -1,4 +1,4 @@
-name: Import APIM to Terraform State
+name: Intial setup to crete KV and TFstate
 
 on: workflow_dispatch
 
