@@ -3,10 +3,10 @@
 set -e
 
 export LOCATION=eastus
-export COMMON_RESOURCE_GROUP_NAME=terraform-ref-rg-2412
-export TF_STATE_STORAGE_ACCOUNT_NAME=terraform-storage-accout-2412
-export TF_STATE_CONTAINER_NAME=terraform-container-2412
-export KEYVAULT_NAME=terraform-kv-2412
+export COMMON_RESOURCE_GROUP_NAME=rg-tfstate1
+export TF_STATE_STORAGE_ACCOUNT_NAME=stgtfstate1
+export TF_STATE_CONTAINER_NAME=contfstate1
+export KEYVAULT_NAME=apim.tfstate1
 
 # Create the resource group
 if  ( `az group exists --resource-group $COMMON_RESOURCE_GROUP_NAME` == "true" );

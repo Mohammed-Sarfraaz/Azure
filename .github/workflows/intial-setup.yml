@@ -6,15 +6,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-env:
-  TF_STATE_STORAGE_ACCOUNT_NAME: "stgtfstate"
-  TF_STATE_CONTAINER_NAME: "contfstate"
-  TF_STATE_FILE_NAME: "apim.tfstate"
-  APIM_RESOURCE_GROUP: "mss-rg-apim"
-  APIM_NAME: "mssapim2"
-  APIM_RESOURCE_GROUP_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/mss-rg-apim"
-  APIM_RESOURCE_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/mss-rg-apim/providers/Microsoft.ApiManagement/service/mssapim2"
-
 
 jobs:
   terraform:
