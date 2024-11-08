@@ -41,6 +41,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Get KV value
+        uses: Azure/get-keyvault-secrets@v1
+        with:
+          keyvault: "kvsarfraaz"
+          secrets: 'tfstate-storage-key'
+        id: myGetSecretAction
+
       # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
@@ -50,10 +57,10 @@ jobs:
       - name: Terraform Init
         run: > 
           terraform init -backend=true -input=false
-          -backend-config=storage_account_name="stgtfstate"
-          -backend-config=resource_group_name="rg-tfstate"
-          -backend-config=container_name="contfstate"
-          -backend-config=key="apim.tfstate"
+          -backend-config=storage_account_name="stgtfstate1"
+          -backend-config=resource_group_name="rg-tfstate1"
+          -backend-config=container_name="contfstate1"
+          -backend-config=key=${{ steps.myGetSecretAction.outputs.tfstate-storage-key }}
           -backend-config=use_oidc=true
           -backend-config=tenant_id=${{ secrets.ARM_TENANT_ID }}
           -backend-config=client_id=${{ secrets.ARM_CLIENT_ID }}
