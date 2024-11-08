@@ -11,6 +11,7 @@ env:
   TF_STATE_CONTAINER_NAME: "contfstate"
   TF_STATE_FILE_NAME: "apim.tfstate"
   APIM_RESOURCE_GROUP: "mss-rg-apim"
+  APIM_KEY_VAULT_NAME: "kvapimsecrets"
   APIM_TERRAFORM_STATE_RG: "rg-apim-common-services"
   APIM_NAME: "mssapim2"
   APIM_RESOURCE_GROUP_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/mss-rg-apim"
@@ -45,7 +46,7 @@ jobs:
       - name: Get KV value
         uses: Azure/get-keyvault-secrets@v1
         with:
-          keyvault: "kvapimsecrets"
+          keyvault: ${{env.APIM_KEY_VAULT_NAME}}
           secrets: 'tfstate-storage-key'
         id: myGetSecretAction
 
