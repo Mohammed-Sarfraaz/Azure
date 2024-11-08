@@ -1,4 +1,4 @@
-name: Intial setup to crete KV and TFstate
+name: Initial setup to create KV and Storage of TF State
 
 on: workflow_dispatch
 
