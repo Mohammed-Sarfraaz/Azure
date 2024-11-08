@@ -80,4 +80,4 @@ jobs:
       
       - name: Import APIM API to Terraform State
         run: |
-          terraform import azurerm_api_management.apim.api ${APIM_API_RESOURCE_ID}
+          terraform import azurerm_api_management_api.api ${APIM_API_RESOURCE_ID}
