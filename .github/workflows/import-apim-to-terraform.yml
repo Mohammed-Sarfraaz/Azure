@@ -69,7 +69,7 @@ jobs:
     
       - name: Import APIM RG to Terraform State
         run: |
-          terraform import azurerm_resource_group.rg ${APIM_RESOURCE_GROUP}    
+          terraform import azurerm_resource_group.rg ${APIM_RESOURCE_GROUP_ID}    
 
       - name: Import APIM to Terraform State
         run: |
