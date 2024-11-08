@@ -2,7 +2,7 @@
 
 set -e
 
-export LOCATION=useast
+export LOCATION=eastus
 export COMMON_RESOURCE_GROUP_NAME=terraform-ref-rg-786
 export TF_STATE_STORAGE_ACCOUNT_NAME=tfstatestracct-786
 export TF_STATE_CONTAINER_NAME=tfstate-containe-786
