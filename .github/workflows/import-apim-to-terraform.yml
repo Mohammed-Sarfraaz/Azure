@@ -45,7 +45,7 @@ jobs:
       - name: Get KV value
         uses: Azure/get-keyvault-secrets@v1
         with:
-          keyvault: "kvsarfraaz"
+          keyvault: "kvapimsecrets"
           secrets: 'tfstate-storage-key'
         id: myGetSecretAction
 
