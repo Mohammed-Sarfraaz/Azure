@@ -19,7 +19,7 @@ resource "azurerm_api_management" "apim" {
 }
 
 # create API
-resource "azurerm_api_management_api" "apiHealthProbe" {
+resource "azurerm_api_management_api" "api" {
   name                = "health-probe"
   resource_group_name = azurerm_resource_group.rg.name
   api_management_name = azurerm_api_management.apim.name
