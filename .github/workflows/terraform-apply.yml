@@ -37,7 +37,7 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
-
+    # Get Tf key from KV
     - name: Get KV value
       uses: Azure/get-keyvault-secrets@v1
       with:
