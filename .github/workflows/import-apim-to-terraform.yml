@@ -11,6 +11,7 @@ env:
   TF_STATE_CONTAINER_NAME: "contfstate"
   TF_STATE_FILE_NAME: "apim.tfstate"
   APIM_RESOURCE_GROUP: "mss-rg-apim"
+  APIM_TERRAFORM_STATE_RG: "rg-apim-common-services"
   APIM_NAME: "mssapim2"
   APIM_RESOURCE_GROUP_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/mss-rg-apim"
   APIM_RESOURCE_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/mss-rg-apim/providers/Microsoft.ApiManagement/service/mssapim2"
@@ -68,7 +69,7 @@ jobs:
     
       - name: Import APIM RG to Terraform State
         run: |
-          terraform import azurerm_resource_group.rg ${APIM_RESOURCE_GROUP_ID}    
+          terraform import azurerm_resource_group.rg ${APIM_TERRAFORM_STATE_RG}    
 
       - name: Import APIM to Terraform State
         run: |
