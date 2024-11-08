@@ -16,6 +16,8 @@ env:
   APIM_NAME: "mssapim2"
   APIM_RESOURCE_GROUP_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/mss-rg-apim"
   APIM_RESOURCE_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/mss-rg-apim/providers/Microsoft.ApiManagement/service/mssapim2"
+  APIM_API_RESOURCE_ID: "/subscriptions/${{ secrets.ARM_SUBSCRIPTION_ID }}/resourceGroups/mss-rg-apim/providers/Microsoft.ApiManagement/service/mssapim2/apis/health-probe"
+ 
 
 
 jobs:
@@ -75,3 +77,7 @@ jobs:
       - name: Import APIM to Terraform State
         run: |
           terraform import azurerm_api_management.apim ${APIM_RESOURCE_ID}
+      
+      - name: Import APIM API to Terraform State
+        run: |
+          terraform import azurerm_api_management.apim.api ${APIM_API_RESOURCE_ID}
