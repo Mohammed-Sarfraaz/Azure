@@ -4,18 +4,18 @@ terraform {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "mss-rg-apim"
-  location = "eastus"
+  name     = var.resource_group_name #"mss-rg-apim"
+  location = var.location #"eastus"
 }
 
 
 resource "azurerm_api_management" "apim" {
-  name                = "mssapim2"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  publisher_name      = "Sarfraaz"
-  publisher_email     = "sarfraaz-nov-24@outlook.com"
-  sku_name            = "Developer_1"
+  name                = var.apim_name
+  publisher_name  = var.publisher_name
+  publisher_email = var.publisher_email
+  sku_name        = "${var.sku_tier}_${var.sku_capacity}"
 }
 
 # create API
