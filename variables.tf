@@ -40,9 +40,3 @@ variable "publisher_email" {
   type        = string
 }
 
-
-variable "products" {
-  description = "List of products to create."
-  type        = list(string)
-  default     = []
-}
