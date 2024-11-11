@@ -10,11 +10,11 @@ resource "azurerm_resource_group" "rg" {
 
 
 resource "azurerm_api_management" "apim" {
-  name                = "mssapim2"
+  name                = var.apim_name #"mssapim2"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  publisher_name      = "Sarfraaz"
-  publisher_email     = "sarfraaz-nov-24@outlook.com"
+  publisher_name      = var.publisher_name #"Sarfraaz"
+  publisher_email     = var.publisher_email #"sarfraaz-nov-24@outlook.com"
   sku_name            = "Developer_1"
 }
 
