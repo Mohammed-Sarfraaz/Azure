@@ -1,4 +1,3 @@
-
 variable "apim_name" {
   description = "Azure API Gateway Name"
   type        = string
@@ -41,17 +40,6 @@ variable "publisher_email" {
   type        = string
 }
 
-variable "named_values" {
-  description = "Named values configurations."
-  type = list(object({
-    name         = string
-    display_name = optional(string)
-    value        = string
-    secret       = optional(bool, false)
-  }))
-  default  = []
-  nullable = false
-}
 
 variable "products" {
   description = "List of products to create."
