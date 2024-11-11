@@ -8,7 +8,7 @@ variable "resource_group_name" {
   type        = string
 }
 
-variable "location" {
+variable "apim_location" {
   description = "Azure location."
   type        = string
 }

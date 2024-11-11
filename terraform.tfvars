@@ -1,5 +1,5 @@
 apim_name           = "mssapim2"
-location            = "eastus"
+apim_location       = "eastus"
 resource_group_name = "mss-rg-apim"
 sku_tier            = "Developer"
 sku_capacity        = 1
