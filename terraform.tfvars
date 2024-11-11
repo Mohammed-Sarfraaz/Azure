@@ -1,4 +1,4 @@
-apim_name           = "mss-rg-apim"
+apim_name           = "mssapim2"
 location            = "eastus"
 resource_group_name = "mss-rg-apim"
 sku_tier            = "Developer"

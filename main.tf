@@ -4,7 +4,7 @@ terraform {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "mss-rg-apim"
+  name     = var.resource_group_name #"mss-rg-apim"
   location = "eastus"
 }
 
