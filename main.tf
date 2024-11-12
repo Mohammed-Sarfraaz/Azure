@@ -5,7 +5,7 @@ terraform {
 
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name #"mss-rg-apim"
-  location = var.apim_location #"eastus"
+  location = var.apim_location       #"eastus"
 }
 
 
@@ -13,7 +13,7 @@ resource "azurerm_api_management" "apim" {
   name                = var.apim_name #"mssapim2"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  publisher_name      = var.publisher_name #"Sarfraaz"
+  publisher_name      = var.publisher_name  #"Sarfraaz"
   publisher_email     = var.publisher_email #"sarfraaz-nov-24@outlook.com"
   sku_name            = "Developer_1"
 }
